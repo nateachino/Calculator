@@ -3,15 +3,15 @@ function addition(num1, num2) {
 }
 
 function sub(num1, num2) {
-  return num1 - num2;
+  return Number(num1) - Number(num2);
 }
 
 function multiply(num1, num2) {
-  return num1 * num2;
+  return Number(num1) * Number(num2);
 }
 
 function divide(num1, num2) {
-  return num1 / num2;
+  return Number(num1) / Number(num2);
 }
 
 function operate(operator, num1, num2) {
@@ -22,33 +22,136 @@ function operate(operator, num1, num2) {
   } else if (operator == "*") {
     result = multiply(num1, num2);
   } else if (operator == "/") {
-    result = divide(num1, num2);
+    if (num2 == 0) {
+      output.textContent = "Impossible";
+    } else {
+      result = divide(num1, num2);
+    }
   }
   output.textContent = result;
+  value = result;
+  input.blur();
+  input.value = "";
+  console.log(value);
 }
 
-let result;
+let result = null;
 let operation;
 let output = document.querySelector("#output");
-const buttons = document.getElementById("button-container");
+
 const equals = document.getElementById("equals");
 const add = document.getElementById("add");
+const subtract = document.getElementById("subtract");
+const multi = document.getElementById("multiply");
+const divi = document.getElementById("divide");
+const clear = document.getElementById("clear");
+
 let input = document.querySelector("input");
+
 let value = 0;
 let value2 = 0;
 
 input.focus();
 
 add.addEventListener("mousedown", () => {
-  operation = "+";
-  value = input.value;
-  input.blur();
-  input.value = "";
-  output.textContent = value + " " + operation;
+  if (result == null) {
+    operation = "+";
+    if (value == 0) {
+      value = input.value;
+    }
+    input.blur();
+    input.value = "";
+    output.textContent = value + " " + operation;
+  } else {
+    operation = "+";
+    if (value == 0) {
+      value = input.value;
+    }
+    input.blur();
+    input.value = "";
+    output.textContent = value + " " + operation;
+  }
+});
+
+subtract.addEventListener("mousedown", () => {
+  if (result == null) {
+    operation = "-";
+    if (value == 0) {
+      value = input.value;
+    }
+    input.blur();
+    input.value = "";
+    output.textContent = value + " " + operation;
+  } else {
+    operation = "-";
+    if (value == 0) {
+      value = input.value;
+    }
+    input.blur();
+    input.value = "";
+    output.textContent = value + " " + operation;
+  }
+});
+
+multi.addEventListener("mousedown", () => {
+  if (result == null) {
+    operation = "*";
+    if (value == 0) {
+      value = input.value;
+    }
+    input.blur();
+    input.value = "";
+    output.textContent = value + " " + operation;
+  } else {
+    operation = "*";
+    if (value == 0) {
+      value = input.value;
+    }
+    input.blur();
+    input.value = "";
+    output.textContent = value + " " + operation;
+  }
+});
+
+divi.addEventListener("mousedown", () => {
+  if (result == null) {
+    operation = "/";
+    if (value == 0) {
+      value = input.value;
+    }
+    input.blur();
+    input.value = "";
+    output.textContent = value + " " + operation;
+  } else {
+    operation = "/";
+    if (value == 0) {
+      value = input.value;
+    }
+    input.blur();
+    input.value = "";
+    output.textContent = value + " " + operation;
+  }
 });
 
 equals.addEventListener("mousedown", () => {
   console.log(value);
   value2 = input.value;
-  operate(operation, value, value2);
+  console.log(input.value);
+  if (value2 == undefined) {
+    value2 == 0;
+  }
+  if (operation == null || operation == undefined) {
+    output.textContent = "Pick an operation!";
+  } else {
+    operate(operation, value, value2);
+  }
+});
+
+clear.addEventListener("mousedown", () => {
+  value = 0;
+  value2 = 0;
+  result = 0;
+  output.textContent = "output";
+  input.blur;
+  input.value = 0;
 });
