@@ -50,6 +50,7 @@ let input = document.querySelector("input");
 
 let value = 0;
 let value2 = 0;
+let which;
 
 input.focus();
 
@@ -62,6 +63,7 @@ add.addEventListener("mousedown", () => {
     input.blur();
     input.value = "";
     output.textContent = value + " " + operation;
+    which = 1;
   } else {
     operation = "+";
     if (value == 0) {
@@ -147,6 +149,8 @@ equals.addEventListener("mousedown", () => {
   }
 });
 
+const container = document.querySelector("#button-container");
+
 clear.addEventListener("mousedown", () => {
   value = 0;
   value2 = 0;
@@ -155,3 +159,16 @@ clear.addEventListener("mousedown", () => {
   input.blur;
   input.value = 0;
 });
+
+for (i = 0; i <= 9; i++) {
+  let padNum = document.createElement("button");
+  padNum.setAttribute("id", i);
+  container.appendChild(padNum);
+  padNum.textContent = padNum.id;
+
+  padNum.addEventListener("mousedown", (num) => {
+    num = padNum.id;
+    input.value += num;
+    output.textContent = input.value;
+  });
+}
